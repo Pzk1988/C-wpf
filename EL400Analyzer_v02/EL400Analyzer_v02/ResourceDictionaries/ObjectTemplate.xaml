@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:EL400Analyzer_v02.ResourceDictionaries"
+                    xmlns:conv="clr-namespace:EL400Analyzer_v02.Converters">
+
+    <conv:ObjectStateToHexString x:Key="objectStateToHexString"  />
+    
+    <DataTemplate x:Key="ObjectLogTemplate">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding Objects, Converter={StaticResource objectStateToHexString}}" />
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>

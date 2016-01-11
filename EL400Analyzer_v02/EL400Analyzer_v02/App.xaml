@@ -1,0 +1,24 @@
+﻿<Application x:Class="EL400Analyzer_v02.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:EL400Analyzer_v02"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            
+            <Style TargetType="ListViewItem">
+                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+            </Style>
+            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ResourceDictionaries/CabinetTemplate.xaml" />
+                <ResourceDictionary Source="ResourceDictionaries/TextTemplate.xaml" />
+                <ResourceDictionary Source="ResourceDictionaries/ObjectTemplate.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+        
+
+    </Application.Resources>
+</Application>

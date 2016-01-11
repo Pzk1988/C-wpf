@@ -1,0 +1,86 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:EL400Analyzer_v02.ResourceDictionaries"
+                    xmlns:conv="clr-namespace:EL400Analyzer_v02.Converters">
+
+    <conv:ByteToHexString x:Key="byteToHexString"  />
+
+    <DataTemplate x:Key="virtualStateTemplate">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding ID}">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="Black" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding State}" Value="True">
+                                    <Setter Property="Foreground" Value="Green" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding OCC}" Value="True">
+                                    <Setter Property="Foreground" Value="Red" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+            </TextBlock>
+            <TextBlock Text=" "/>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="inputCardTemplate">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Name="dash" Text="-"/>
+            <TextBlock Text="{Binding Converter={StaticResource byteToHexString}}"/>
+        </StackPanel>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                <Setter TargetName="dash" Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CabinetLogTemplate">
+        <StackPanel Orientation="Horizontal">
+            <!--<TextBlock Text="{Binding CabinetID, StringFormat=CabinetID: {0}}" />-->
+            <TextBlock Text="{Binding CabinetID}" />
+            <TextBlock Text=",  " />
+
+            <ItemsControl ItemsSource="{Binding InputCards}" ItemTemplate="{StaticResource inputCardTemplate}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+
+            <TextBlock Text="   " />
+
+            <ItemsControl ItemsSource="{Binding OutputCards}" ItemTemplate="{StaticResource inputCardTemplate}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+
+            <TextBlock Text="   " />
+
+            <ItemsControl ItemsSource="{Binding VirtualInputs}" ItemTemplate="{StaticResource virtualStateTemplate}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+
+            <TextBlock Text="   " />
+
+            <ItemsControl ItemsSource="{Binding VirtualOutputs}" ItemTemplate="{StaticResource virtualStateTemplate}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>
